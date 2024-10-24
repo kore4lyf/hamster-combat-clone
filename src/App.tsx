@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Hamster from './icons/Hamster'
-import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin } from './images'
+import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, hamsterCoin, mainCharacter } from './images'
 import Info from './icons/Info'
 import Settings from './icons/Settings'
+import Mine from './icons/Mine';
+import Friends from './icons/Friends'
+import Coins from './icons/Coins'
 
 function App() {
 
@@ -183,9 +186,20 @@ function App() {
                   <p className='text-4xl text-white'>{points.toLocaleString()}</p>
                 </div>
               </div>
+            
+              <div className='px-4 mt-4 flex justify-center'>
+                <div className='w-80 h-80 p-4 rounded-full circle-outer' onClick={handleCardClick}>
+                  <div className='w-full h-full rounded-full circle-inner'>
+                    <img src={mainCharacter} alt='Main Character' className='w-full h-full'/>
+                  </div>
+                </div>
+              </div>
+
         </div>
       </div>
   </div>
+
+  
 </div>
   )
 }
