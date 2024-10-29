@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Use the latest stable version
+        uses: actions/checkout@v3  # Updated to the latest version
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Use the latest stable version
+        uses: actions/setup-node@v3  # This is already the latest version
         with:
           node-version: '20'  # Specify Node.js version to use
 
@@ -27,7 +27,7 @@ jobs:
           CI: false  # Disable CI mode to allow warnings
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4.4.0  # Stable version
+        uses: JamesIves/github-pages-deploy-action@4.4.0  # Stable version
         with:
           branch: gh-pages  # The branch to deploy to
           folder: dist      # The folder containing built files

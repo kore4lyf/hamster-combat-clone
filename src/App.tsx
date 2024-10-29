@@ -90,7 +90,7 @@ function App() {
     }
 
     updatedCountdowns()
-    const interval = setInterval(updatedCountdowns, 600000) // updated every minute
+    setInterval(updatedCountdowns, 600000) // updated every minute
   })
 
   const calculateProgress = () => {
