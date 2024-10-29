@@ -76,7 +76,10 @@ function App() {
 
     setPoints(points + pointsToAdd)
     setClicks([...clicks, {id: Date.now(), x: e.pageX, y: e.pageY}])
+  }
 
+  const handleAnimationEnd = (id: number) => {
+    setClicks((prevClicks) => prevClicks.filter(click => click.id !== id))
   }
 
   useEffect(() => {
@@ -100,13 +103,36 @@ function App() {
     const progress = ((points - currentLevelMin) / (nextLevelMinPoints - currentLevelMin)) * 100
     return Math.min(progress, 100);
   }
-
+  
   const formatProfitPerHour = (profit: number) => {
     if (profit >= 1000000000) return `+${(profit / 1000000000).toFixed(2)}B`
     if (profit >= 1000000) return `+${(profit / 1000000).toFixed(2)}M`
     if (profit >= 1000) return `+${(profit / 1000).toFixed(2)}K`
     return `${profit}`
   }
+
+  // level progression logic
+  useEffect(() => {
+    const currentLevelMin = levelMinPoints[levelIndex]
+    const nextLevelMin = levelMinPoints[levelIndex + 1]
+
+    if (points > nextLevelMin && levelIndex < levelNames.length - 1) {
+      setLevelIndex(levelIndex + 1)
+    } else if (points < currentLevelMin && levelIndex > 0) {
+      setLevelIndex
+    }
+  })
+
+  
+  // Automated addition of points per seconds based on the profit per hour 
+  useEffect(() => {
+    const pointsPerSecond = Math.floor(profitPerHour / 1600)
+    const interval = setInterval(() => {
+      setPoints(prevPoints => prevPoints + pointsPerSecond)
+    }, 1000)
+    return () => clearInterval(interval)
+    }, [profitPerHour])
+
 
   return (
     <div className='bg-black flex justify-center'>
@@ -221,6 +247,23 @@ function App() {
       <p className='mt-1'>Airdrop</p>
     </div>
   </div>
+
+  {
+    clicks.map((click) => (
+      <div
+        key={click.id}
+        className='absolute text-5xl font-bold opacity-0 text-white pointer-event-none'
+        style={{
+          top: `${click.y - 42}px`,
+          left: `${click.x - 28}px`,
+          animation: 'float 1s ease-out'
+        }}
+        onAnimationEnd={() => handleAnimationEnd(click.id)}>
+          {pointsToAdd}
+      </div>
+    ))
+  }
+
 </div>
   )
 }
