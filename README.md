@@ -1,50 +1,95 @@
-# React + TypeScript + Vite
+Here's the updated README, now including Tailwind CSS setup and the specified file structure:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# Hamster Tap Game Clone
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a clone of the classic hamster-tap game, designed to simulate the "tap to earn" functionality seen in popular Telegram mini-apps. Built with TypeScript, React, Vite, and styled with Tailwind CSS, it provides a simple, responsive user interface for interactive gameplay.
 
-## Expanding the ESLint configuration
+## Table of Contents
+- [Hamster Tap Game Clone](#hamster-tap-game-clone)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Development](#development)
+    - [Technology Stack](#technology-stack)
+    - [Tailwind CSS Integration](#tailwind-css-integration)
+    - [File Structure](#file-structure)
+    - [Available Scripts](#available-scripts)
+  - [License](#license)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
+- **Simple Tap Mechanic**: Basic tap-to-earn functionality that counts user interactions.
+- **Real-Time Updates**: Responsive UI reflecting score updates as the user taps.
+- **Optimized Performance**: Built with Vite for fast and efficient development.
+- **Tailwind CSS**: Responsive, utility-first styling for streamlined design.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/hamster-tap-clone.git
+   cd hamster-tap-clone
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Build the project for production**:
+   ```bash
+   npm run build
+   ```
+
+## Usage
+
+- Launch the app in your browser and start tapping to earn points. This app serves as a simple simulation for testing tap-based interactive mechanics.
+
+## Development
+
+### Technology Stack
+- **React**: For building the user interface.
+- **TypeScript**: Provides type safety and better code maintainability.
+- **Vite**: A lightweight build tool optimized for speed and simplicity.
+- **Tailwind CSS**: For easy and responsive styling.
+
+### Tailwind CSS Integration
+This project includes [Tailwind CSS](https://tailwindcss.com/) for utility-first styling. To use Tailwind classes, make sure you've included the necessary Tailwind configuration in `index.css`:
+
+```css
+/* index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### File Structure
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+The project follows this organized file structure:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+src/
+  assets/         # Contains react.svg
+  icons/          # Contains React components with SVG codes
+  images/         # Contains PNG images with an index.ts that imports and exports all images
+  utils/          # Stores custom types in type.ts
+App.css           # Styles for App component
+App.tsx           # Main application component
+index.css         # Global styles and Tailwind configuration
+main.tsx          # Entry point for the application
+```
+
+### Available Scripts
+- **`npm run dev`**: Runs the app in development mode.
+- **`npm run build`**: Builds the app for production.
+- **`npm run preview`**: Serves the production build for preview.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
