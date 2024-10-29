@@ -1,36 +1,35 @@
-name: Build and Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - master
+      - main  # This triggers the workflow on pushes to the 'main' branch
 
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3  # Updated to the latest version
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # This is already the latest version
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Specify Node.js version to use
+          node-version: '18' # Adjust Node version to match your app's requirement
 
       - name: Install dependencies
-        run: npm ci  # Use 'npm ci' for a clean install
+        run: npm install
 
-      - name: Build project
+      - name: Build the project
         run: npm run build
-        env:
-          CI: false  # Disable CI mode to allow warnings
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4 # Stable version
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages  # The branch to deploy to
-          folder: dist      # The folder containing built files
+          branch: gh-pages
+          publish_dir: ./dist # This is where Vite builds the static files
+
 
 permissions:
   contents: write  # Allow action to write to repository contents
