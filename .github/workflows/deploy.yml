@@ -27,7 +27,7 @@ jobs:
           CI: false  # Disable CI mode to allow warnings
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.4.0  # Stable version
+        uses: JamesIves/github-pages-deploy-action@4  # Stable version
         with:
           branch: gh-pages  # The branch to deploy to
           folder: dist      # The folder containing built files
