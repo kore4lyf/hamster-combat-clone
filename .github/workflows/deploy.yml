@@ -2,34 +2,30 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main  # This triggers the workflow on pushes to the 'main' branch
-
+    branches: master
+  pull_request:
+    branches: master
+    
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: '18' # Adjust Node version to match your app's requirement
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the project
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
+          node-version: '18.x'
+      - run: npm install
+      - run: npm run build
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          publish_dir: ./dist # This is where Vite builds the static files
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
 
 permissions:
-  contents: write  # Allow action to write to repository contents
+  contents: write
